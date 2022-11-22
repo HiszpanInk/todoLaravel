@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\TodoListAddController;
-use App\Http\Controllers\TodoListDeleteController;
-use App\Http\Controllers\TodoListEditController;
-use App\Http\Controllers\TodoListController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome');
+});
 
-Route::get('/todo', [TodoListController::class, 'index'])->name('todolist');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/todo/add', [TodoListAddController::class, 'add'])->name('todolist.add');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/todo/delete/{id}', [TodoListDeleteController::class, 'delete'])->name('todolist.delete');
-
-Route::post('/todo/edit/{id}', [TodoListEditController::class, 'edit'])->name('todolist.edit');
+require __DIR__.'/auth.php';
