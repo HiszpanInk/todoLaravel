@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExampleFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TodoList\AddEntryController;
 use App\Http\Controllers\TodoList\DeleteEntryController;
@@ -42,5 +43,9 @@ Route::prefix('/todo')->group(function() {
 
     Route::post('/edit/{id}', [EditEntryController::class, 'edit'])->name('todolist.edit');
 })->middleware(['auth']);
+
+Route::get('/form', [ExampleFormController::class, 'create'])->name("form");
+Route::post('/formSubmit', [ExampleFormController::class, 'store'])->name("formSubmit");
+
 
 require __DIR__.'/auth.php';
