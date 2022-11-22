@@ -35,12 +35,12 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/todo')->group(function() {
     Route::get('/', [ListEntryController::class, 'index'])->name('todolist');
-  
-  Route::post('/add', [AddEntryController::class, 'add'])->name('todolist.add');
-  
-  Route::get('/delete/{id}', [DeleteEntryController::class, 'delete'])->name('todolist.delete');
-  
-  Route::post('/edit/{id}', [EditEntryController::class, 'edit'])->name('todolist.edit');
-  });
+    
+    Route::post('/add', [AddEntryController::class, 'add'])->name('todolist.add');
+
+    Route::get('/delete/{id}', [DeleteEntryController::class, 'delete'])->name('todolist.delete');
+
+    Route::post('/edit/{id}', [EditEntryController::class, 'edit'])->name('todolist.edit');
+})->middleware(['auth']);
 
 require __DIR__.'/auth.php';
