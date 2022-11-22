@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TodoList;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 
-class TodoListController extends Controller
+class ListEntryController extends Controller
 {
     //
     public function index() {
-
         $entriesList = Entry::all();
         return view('todolist', ['entries' => $entriesList]);
     }
