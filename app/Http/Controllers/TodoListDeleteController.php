@@ -9,8 +9,7 @@ class TodoListDeleteController extends Controller
 {
     //
     public function delete(Request $request, $id) {
-        $entry = Entry::find($id);
-        $entry->delete();
+        Entry::destroy($id);
         return redirect("todo");
     }
 }
